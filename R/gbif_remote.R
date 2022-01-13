@@ -4,16 +4,26 @@
 #'
 #' Connect to GBIF remote directly. Can be much faster than downloading
 #' for one-off use or when using the package from a server in the same region
-#' as the data.
+#' as the data. 
 #'
-#' @param version GBIF snapshot date
-#' @param bucket GBIF bucket name (including region)
+#' @param version GBIF snapshot date. See available dates [here](https://gbif-open-data-eu-central-1.s3.eu-central-1.amazonaws.com/index.html#occurrence/).
+#' @param bucket GBIF bucket name (including region). See https://github.com/gbif/occurrence/blob/master/aws-public-data.md for the available regions.
 #' @param to_duckdb Return a remote duckdb connection or arrow connection?
 #'   Note that leaving as FALSE may be faster but is limited to the dplyr-style
 #'   operations supported by [arrow] alone.
 #' @param ... additional parameters passed to the s3_bucket() (e.g. for remote
 #'  access to independently hosted buckets)
 #' @examplesIf interactive()
+#' ## Choosing closer AWS region
+#' gbif <- gbif_remote(bucket = "gbif-open-data-eu-central-1")  # central Europe
+#' gbif <- gbif_remote(bucket = "gbif-open-data-us-east-1")  # eastern USA
+#' gbif <- gbif_remote(bucket = "gbif-open-data-sa-east-1")  # south America
+#' gbif <- gbif_remote(bucket = "gbif-open-data-af-south-1")  # southern Africa
+#' gbif <- gbif_remote(bucket = "gbif-open-data-ap-southeast-2")  # Asia-Pacific
+#' 
+#' ## Choosing snapshot date
+#' gbif <- gbif_remote(version = "2021-12-01")   
+#' 
 #' @export
 #'
 gbif_remote <-
